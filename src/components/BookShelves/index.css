@@ -1,0 +1,49 @@
+.book-shelves-bg-container {
+  min-height: 88vh;
+  padding: 20px;
+  background-color: #e1f2e3;
+  margin: auto;
+}
+
+.book-shelves {
+  width: 90%;
+  margin: auto;
+  border: 3px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.books-search {
+  width: 260px;
+  height: 36px;
+  top: 80px;
+  left: 24px;
+  border-radius: 0px, 3px, 3px, 0px;
+  padding: 8px;
+  border: none;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #334155;
+  width: 300px;
+  border-radius: 8px;
+  border: 3px solid black;
+}
+
+.search-icon {
+  width: 40px;
+  border: none;
+  background-color: #edeff1;
+}
+
+.search-button {
+  border: none;
+  background-color: transparent;
+}

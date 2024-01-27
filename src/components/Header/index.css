@@ -1,0 +1,130 @@
+.header {
+  padding: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: auto;
+}
+
+@media screen and (max-width: 769px) {
+  .header {
+    width: 100%;
+  }
+}
+
+.web-logo {
+  width: 92px;
+  height: 24px;
+  top: 16px;
+  left: 24px;
+}
+
+@media screen and (min-width: 769px) {
+  .web-logo {
+    width: 133px;
+    height: 41px;
+    top: 24px;
+    left: 150px;
+  }
+}
+
+.ham-menu {
+  width: 16px;
+  height: 16px;
+  top: 20px;
+  left: 320px;
+  padding: 2.4px, 0.8px, 2.4px, 0.8px;
+}
+
+@media screen and (min-width: 769px) {
+  .ham-menu {
+    display: none;
+  }
+}
+
+.navigation-container {
+  padding: 20px;
+  background-color: #e1f2e3;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (min-width: 769px) {
+  .navigation-container {
+    display: none;
+  }
+}
+
+.home {
+  width: 44px;
+  height: 26px;
+  top: 80px;
+  left: 24px;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: -0.35555556416511536px;
+  text-align: left;
+  color: #64748b;
+}
+
+* {
+  text-decoration: none;
+  margin: 0px;
+}
+
+.bookshelves {
+  width: 94px;
+  height: 26px;
+  top: 80px;
+  left: 84px;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: -0.35555556416511536px;
+  text-align: left;
+  color: #64748b;
+}
+
+.logout-button {
+  border: none;
+  width: 73px;
+  height: 32px;
+  top: 77px;
+  left: 202px;
+  color: #ffffff;
+  background-color: #0284c7;
+  border-radius: 7px;
+  cursor: pointer;
+  outline: none;
+}
+
+.close-button {
+  width: 24px;
+  height: 24px;
+  top: 81px;
+  left: 312px;
+  padding: 2px, 2px, 2px, 2p;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+}
+
+.large-device-navigation-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 350px;
+}
+
+@media screen and (max-width: 769px) {
+  .large-device-navigation-container {
+    display: none;
+  }
+}
