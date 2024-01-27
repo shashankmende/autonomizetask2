@@ -1,0 +1,17 @@
+.tab-button {
+  background-color: transparent;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 15px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+  color: #0284c7;
+  border: 2px solid #0284c7;
+  font-size: 13px;
+}
+
+.blue-color {
+  background-color: #0284c7;
+  color: white;
+}
