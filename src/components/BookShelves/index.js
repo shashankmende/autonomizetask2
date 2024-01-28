@@ -1,10 +1,12 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-
+import Loader from 'react-loader-spinner'
 import {BsSearch} from 'react-icons/bs'
 import Header from '../Header'
 import './index.css'
 import Tabs from '../BookShelvesTabs'
+import BookItems from '../BookShelvesBookItems'
+import Footer from '../Footer'
 
 const bookshelvesList = [
   {
@@ -42,6 +44,7 @@ class BookShelves extends Component {
     search: '',
     apiStatus: apiStatusConstants.inProgress,
     bookDetails: [],
+    currentTabValue: bookshelvesList[0].label,
   }
 
   componentDidMount() {
@@ -53,6 +56,7 @@ class BookShelves extends Component {
       {
         tabId: item.id,
         shelf: item.value,
+        currentTabValue: item.label,
       },
       this.getData,
     )
@@ -65,6 +69,16 @@ class BookShelves extends Component {
   }
 
   onClickSearchButton = () => {
+    this.setState({
+      apiStatus: apiStatusConstants.inProgress,
+    })
+    this.getData()
+  }
+
+  onClickTryAgain = () => {
+    this.setState({
+      apiStatus: apiStatusConstants.inProgress,
+    })
     this.getData()
   }
 
@@ -96,43 +110,207 @@ class BookShelves extends Component {
         apiStatus: apiStatusConstants.success,
         bookDetails: newData,
       })
+    } else {
+      this.setState({
+        apiStatus: apiStatusConstants.fail,
+      })
+    }
+  }
+
+  returnLoadingView = () => (
+    <div className="loader-container">
+      <Loader type="TailSpin" color="#0284C7" height={32} width={32} />
+    </div>
+  )
+
+  renderSuccessView = () => {
+    const {tabId, bookDetails, currentTabValue, search} = this.state
+    return (
+      <>
+        <div className="success-view-responsive-container">
+          <div>
+            <div className="mobile-input-container">
+              <input
+                type="search"
+                className="books-search"
+                placeholder="Search"
+                onChange={this.onChangeInput}
+              />
+              <button
+                type="button"
+                className="search-button"
+                testid="searchButton"
+                onClick={this.onClickSearchButton}
+              >
+                <BsSearch className="search-icon" />
+              </button>
+            </div>
+            <div className="tabs-heading-container">
+              <h1 className="bookshelves-heading">Bookshelves</h1>
+              <div className="tabs-container">
+                {bookshelvesList.map(each => (
+                  <Tabs
+                    key={each.id}
+                    item={each}
+                    isActive={each.id === tabId}
+                    changeTabId={this.changeTabId}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="large-devices-right-container">
+            <div className="large-devices-search-heading-container">
+              <h1 className="tab-specific-heading">{currentTabValue} Books</h1>
+              <div className="large-device-search-container">
+                <input
+                  type="search"
+                  className="books-search"
+                  placeholder="Search"
+                  onChange={this.onChangeInput}
+                  value={search}
+                />
+                <button
+                  type="button"
+                  className="search-button"
+                  testid="searchButton"
+                  onClick={this.onClickSearchButton}
+                >
+                  <BsSearch className="search-icon" />
+                </button>
+              </div>
+            </div>
+            {bookDetails.length === 0 && (
+              <div className="empty-search-list">
+                <img
+                  src="
+https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263717/Asset_1_1Book_shelves_search_not_found_zj8aiu.png
+"
+                  alt="no result"
+                  className="search-not-found-image"
+                />
+                <p className="search-text">
+                  Your search for {search} did not find any matches.
+                </p>
+              </div>
+            )}
+            <ul className="unordered-list">
+              {bookDetails.map(each => (
+                <BookItems key={each.id} book={each} />
+              ))}
+            </ul>
+            <Footer />
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  renderFailureView = () => {
+    const {tabId, currentTabValue} = this.state
+    return (
+      <>
+        <div className="failure-bg-container">
+          <div>
+            <div className="mobile-input-container">
+              <input
+                type="search"
+                className="books-search"
+                placeholder="Search"
+                onChange={this.onChangeInput}
+              />
+              <button
+                type="button"
+                className="search-button"
+                testid="searchButton"
+                onClick={this.onClickSearchButton}
+              >
+                <BsSearch className="search-icon" />
+              </button>
+            </div>
+            <div className="tabs-heading-container">
+              <h1 className="bookshelves-heading">Bookshelves</h1>
+              <div className="tabs-container">
+                {bookshelvesList.map(each => (
+                  <Tabs
+                    key={each.id}
+                    item={each}
+                    isActive={each.id === tabId}
+                    changeTabId={this.changeTabId}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="failure-container">
+            <div className="large-devices-search-heading-container">
+              <h1 className="tab-specific-heading">{currentTabValue} Books</h1>
+              <div className="large-device-search-container">
+                <input
+                  type="search"
+                  className="books-search"
+                  placeholder="Search"
+                  onChange={this.onChangeInput}
+                />
+                <button
+                  type="button"
+                  className="search-button"
+                  testid="searchButton"
+                  onClick={this.onClickSearchButton}
+                >
+                  <BsSearch className="search-icon" />
+                </button>
+              </div>
+            </div>
+
+            <div className="failure-image-heading-try-again-button-container">
+              <img
+                src="
+                https://res.cloudinary.com/dvvhafkyv/image/upload/v1706264074/Group_7522something_went_wrong_raxwgw.png
+                "
+                alt="not found"
+                className="not-found-image"
+              />
+              <p className="failure-para">
+                Something went wrong. Please try again
+              </p>
+
+              <button
+                type="button"
+                className="bookshelves-try-again-button"
+                onClick={this.onClickTryAgain}
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  returnResult = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstants.inProgress:
+        return this.returnLoadingView()
+      case apiStatusConstants.success:
+        return this.renderSuccessView()
+      case apiStatusConstants.fail:
+        return this.renderFailureView()
+      default:
+        return null
     }
   }
 
   render() {
-    const {tabId, bookDetails, search, shelf, apiStatus} = this.state
-    console.log('state parameters', tabId, search, shelf, apiStatus)
     return (
       <>
         <Header />
         <div className="book-shelves-bg-container">
-          <div className="input-container">
-            <input
-              type="search"
-              className="books-search"
-              placeholder="Search"
-              onChange={this.onChangeInput}
-            />
-            <button
-              type="button"
-              className="search-button"
-              testid="searchButton"
-              onClick={this.onClickSearchButton}
-            >
-              <BsSearch className="search-icon" />
-            </button>
-          </div>
-          <h1 className="bookshelves-heading">Bookshelves</h1>
-          <div className="tabs-container">
-            {bookshelvesList.map(each => (
-              <Tabs
-                key={each.id}
-                item={each}
-                isActive={each.id === tabId}
-                changeTabId={this.changeTabId}
-              />
-            ))}
-          </div>
+          <div className="book-shelves">{this.returnResult()}</div>
         </div>
       </>
     )
