@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import './index.css'
 import Cookies from 'js-cookie'
 
@@ -61,21 +62,21 @@ class Login extends Component {
       <div className="login-container">
         <img
           src="https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263034/Ellipse_99login_mobile_book_image_x4czju.png"
-          alt="login website logo"
+          alt="website login"
           className="mobile_book_image"
         />
         <img
           src="
 https://res.cloudinary.com/dvvhafkyv/image/upload/v1706262868/Rectangle_1467login_desktop_book_img_xsp5sy.png
 "
-          alt="login website logo"
+          alt="website login"
           className="desktop_book_image"
         />
         <div className="login-bottom-container">
           <form className="form-container" onSubmit={this.onClickLogin}>
             <img
               src="https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263202/Group_7732book_hub_logo_ogos6t.png"
-              alt="app-logo"
+              alt="login website logo"
               className="website login"
             />
             <label htmlFor="username" className="username-label">

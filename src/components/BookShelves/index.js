@@ -35,6 +35,7 @@ const apiStatusConstants = {
   success: 'SUCCESS',
   inProgress: 'IN_PROGRESS',
   fail: 'FAILURE',
+  invalid: 'INVALID',
 }
 
 class BookShelves extends Component {
@@ -91,34 +92,41 @@ class BookShelves extends Component {
         authorization: `Bearer ${token}`,
       },
     }
-    const response = await fetch(
-      `https://apis.ccbp.in/book-hub/books?shelf=${shelf}&search=${search}`,
-      options,
-    )
-    const data = await response.json()
-    console.log('data', data)
-    if (response.ok === true) {
-      const newData = data.books.map(each => ({
-        authorName: each.author_name,
-        coverPic: each.cover_pic,
-        id: each.id,
-        rating: each.rating,
-        readStatus: each.read_status,
-        title: each.title,
-      }))
+    try {
+      const response = await fetch(
+        `https://apis.ccbp.in/book-hub/books?shelf=${shelf}&search=${search}`,
+        options,
+      )
+
+      const data = await response.json()
+      console.log('data', data)
+      if (response.ok === true) {
+        const newData = data.books.map(each => ({
+          authorName: each.author_name,
+          coverPic: each.cover_pic,
+          id: each.id,
+          rating: each.rating,
+          readStatus: each.read_status,
+          title: each.title,
+        }))
+        this.setState({
+          apiStatus: apiStatusConstants.success,
+          bookDetails: newData,
+        })
+      } else {
+        this.setState({
+          apiStatus: apiStatusConstants.fail,
+        })
+      }
+    } catch (err) {
       this.setState({
-        apiStatus: apiStatusConstants.success,
-        bookDetails: newData,
-      })
-    } else {
-      this.setState({
-        apiStatus: apiStatusConstants.fail,
+        apiStatus: apiStatusConstants.invalid,
       })
     }
   }
 
   returnLoadingView = () => (
-    <div className="loader-container">
+    <div className="loader-container" testid="loader">
       <Loader type="TailSpin" color="#0284C7" height={32} width={32} />
     </div>
   )
@@ -187,11 +195,11 @@ class BookShelves extends Component {
                   src="
 https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263717/Asset_1_1Book_shelves_search_not_found_zj8aiu.png
 "
-                  alt="no result"
+                  alt="no books"
                   className="search-not-found-image"
                 />
                 <p className="search-text">
-                  Your search for {search} did not find any matches.
+                  Your search for {search} did not find any matches
                 </p>
               </div>
             )}
@@ -270,7 +278,7 @@ https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263717/Asset_1_1Book_shel
                 src="
                 https://res.cloudinary.com/dvvhafkyv/image/upload/v1706264074/Group_7522something_went_wrong_raxwgw.png
                 "
-                alt="not found"
+                alt="failure view"
                 className="not-found-image"
               />
               <p className="failure-para">
@@ -291,6 +299,25 @@ https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263717/Asset_1_1Book_shel
     )
   }
 
+  renderInvalidView = () => (
+    <div className="invalid-container">
+      <img
+        src="
+https://res.cloudinary.com/dvvhafkyv/image/upload/v1706264074/Group_7522something_went_wrong_raxwgw.png"
+        alt="something went wrong"
+        className="invalid-image"
+      />
+      <p className="invalid-para">Something went wrong. Please try again</p>
+      <button
+        type="button"
+        className="invalid-try-again-button"
+        onClick={this.onClickTryAgain}
+      >
+        Try Again
+      </button>
+    </div>
+  )
+
   returnResult = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
@@ -300,6 +327,8 @@ https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263717/Asset_1_1Book_shel
         return this.renderSuccessView()
       case apiStatusConstants.fail:
         return this.renderFailureView()
+      case apiStatusConstants.invalid:
+        return this.renderInvalidView()
       default:
         return null
     }

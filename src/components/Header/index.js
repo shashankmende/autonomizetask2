@@ -48,11 +48,11 @@ class Header extends Component {
                 Home
               </NavLink>
             </li>
-            <p className="bookshelves">
+            <li className="bookshelves">
               <NavLink to="/shelf" activeStyle={{color: 'blue'}}>
                 Bookshelves
               </NavLink>
-            </p>
+            </li>
             <button
               type="button"
               className="logout-button"
