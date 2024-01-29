@@ -76,7 +76,7 @@ https://res.cloudinary.com/dvvhafkyv/image/upload/v1706262868/Rectangle_1467logi
           <form className="form-container" onSubmit={this.onClickLogin}>
             <img
               src="https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263202/Group_7732book_hub_logo_ogos6t.png"
-              alt="login website logo"
+              alt="website logo"
               className="website login"
             />
             <label htmlFor="username" className="username-label">

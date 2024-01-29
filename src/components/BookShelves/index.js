@@ -69,7 +69,7 @@ class BookShelves extends Component {
     })
   }
 
-  onClickSearchButton = () => {
+  onClickSearchButton = event => {
     this.setState({
       apiStatus: apiStatusConstants.inProgress,
     })
@@ -143,6 +143,7 @@ class BookShelves extends Component {
                 className="books-search"
                 placeholder="Search"
                 onChange={this.onChangeInput}
+                value={search}
               />
               <button
                 type="button"
@@ -199,7 +200,7 @@ https://res.cloudinary.com/dvvhafkyv/image/upload/v1706263717/Asset_1_1Book_shel
                   className="search-not-found-image"
                 />
                 <p className="search-text">
-                  Your search for {search} did not find any matches
+                  Your search for {search} did not find any matches.
                 </p>
               </div>
             )}

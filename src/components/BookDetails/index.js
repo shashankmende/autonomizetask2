@@ -92,15 +92,16 @@ class BookDetails extends Component {
               <p className="book_details_author_name">
                 {bookDetails.authorName}
               </p>
-              <p className="rating">
-                Avg Rating {<BsFillStarFill color="yellow" />}
-                {'   '}
-                {bookDetails.rating}
-              </p>
-              <p className="read-status">
-                Status:{' '}
-                <span className="span-status">{bookDetails.readStatus}</span>
-              </p>
+              <div className="rating-star-rating-container">
+                <p className="rating">Avg Rating </p>
+                <BsFillStarFill color="yellow" />
+
+                <p>{bookDetails.rating}</p>
+              </div>
+              <div className="read-status-container">
+                <p className="read-status">Status:</p>
+                <p className="span-status">{bookDetails.readStatus}</p>
+              </div>
             </div>
           </div>
           <hr className="horizontal-line" />

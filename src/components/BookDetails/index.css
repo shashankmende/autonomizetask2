@@ -273,3 +273,25 @@
     height: 150px;
   }
 }
+
+.rating-star-rating-container {
+  display: flex;
+  flex-direction: row;
+
+  min-width: 150px;
+  justify-content: space-between;
+}
+
+.read-status-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  min-width: 130px;
+
+  margin: auto;
+}
+@media screen and (max-width: 769px) {
+  .read-status-container {
+    justify-content: center;
+  }
+}
