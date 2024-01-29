@@ -28,7 +28,7 @@ class SimpleSlider extends Component {
     return (
       <>
         <div className="mobile-slider-container">
-          <h1 className="top-mobile-heading"> Top Rated Books</h1>
+          <h1 className="top-mobile-heading">Top Rated Books</h1>
           <Slider {...settings}>
             {bookDetails.map(each => {
               const {id, coverPic, title, authorName} = each
@@ -38,7 +38,7 @@ class SimpleSlider extends Component {
                   <div key={id} className="individual-container">
                     <img src={coverPic} alt={title} className="slider-image" />
                     <h1 className="slider-heading">{title}</h1>
-                    <h1 className="author-name">{authorName}</h1>
+                    <p className="author-name">{authorName}</p>
                   </div>
                 </Link>
               )
@@ -48,7 +48,7 @@ class SimpleSlider extends Component {
 
         <div className="large-slider-container">
           <div className="heading-button-container">
-            <h2 className="top-heading"> Top Rated Books</h2>
+            <h2 className="top-heading">Top Rated Books</h2>
             <Link to="/shelf">
               <button type="button" className="slider-find-books-button">
                 Find Books
@@ -65,7 +65,7 @@ class SimpleSlider extends Component {
                     className="slider-image"
                   />
                   <h1 className="slider-heading">{each.title}</h1>
-                  <h1 className="author-name">{each.authorName}</h1>
+                  <p className="author-name">{each.authorName}</p>
                 </div>
               </Link>
             ))}
