@@ -14,14 +14,16 @@ const BookItems = props => {
         <div className="books-text-container">
           <h1 className="book-item-heading">{book.title}</h1>
           <p className="book-item-para">{book.authorName}</p>
-          <p>
-            <span className="rating-para">Avg Rating</span>{' '}
-            {<BsFillStarFill color="yellow" />} {'  '} {book.rating}
-          </p>
-          <p>
-            <span className="status-text">Status: </span>
-            <span className="book-reading-status">{book.readStatus}</span>
-          </p>
+          <div className="rating-start-container">
+            <p className="rating-para">Avg Rating</p>
+
+            <BsFillStarFill color="yellow" />
+            <p>{book.rating}</p>
+          </div>
+          <div className="reading-status-container">
+            <p className="status-text">Status: </p>
+            <p className="book-reading-status">{book.readStatus}</p>
+          </div>
         </div>
       </li>
     </Link>

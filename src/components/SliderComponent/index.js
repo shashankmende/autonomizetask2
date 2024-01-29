@@ -1,6 +1,9 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Slider from 'react-slick'
+
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import './index.css'
 
 class SimpleSlider extends Component {
@@ -11,7 +14,7 @@ class SimpleSlider extends Component {
     const {bookDetails} = bookDets
     console.log(bookDetails)
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 1000,
       slidesToShow: 2,
@@ -19,16 +22,17 @@ class SimpleSlider extends Component {
     }
 
     const settings2 = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 4,
-      slidesToScroll: 3,
+      slidesToScroll: 4,
     }
     return (
       <>
         <div className="mobile-slider-container">
           <h1 className="top-mobile-heading">Top Rated Books</h1>
+
           <Slider {...settings}>
             {bookDetails.map(each => {
               const {id, coverPic, title, authorName} = each

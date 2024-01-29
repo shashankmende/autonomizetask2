@@ -161,6 +161,7 @@
     line-height: 28px;
     letter-spacing: 0px;
     text-align: left;
+    margin-bottom: 15px;
   }
 }
 
@@ -206,7 +207,9 @@
     justify-content: flex-start;
 
     height: 175px;
-    padding-bottom: 15px;
+    padding-bottom: 25px;
+
+    margin-bottom: 10px;
   }
 }
 
@@ -252,6 +255,8 @@
     width: 85%;
     margin: auto;
     border-radius: 10px;
+
+    padding-bottom: 5px;
   }
 }
 

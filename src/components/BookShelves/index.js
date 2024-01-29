@@ -69,7 +69,7 @@ class BookShelves extends Component {
     })
   }
 
-  onClickSearchButton = event => {
+  onClickSearchButton = () => {
     this.setState({
       apiStatus: apiStatusConstants.inProgress,
     })

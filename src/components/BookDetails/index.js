@@ -110,7 +110,7 @@ class BookDetails extends Component {
             <h1 className="about-author-heading">About Author</h1>
             <p className="about-author-para">{bookDetails.aboutAuthor}</p>
 
-            <h1 className="about-book-heading">About Book</h1>
+            <h1 className="about-author-heading">About Book</h1>
             <p className="about-author-para">{bookDetails.aboutBook}</p>
           </div>
         </div>
